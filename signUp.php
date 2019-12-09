@@ -2,19 +2,20 @@
 if((isset($_POST['email']))){
     echo $_POST['email'];
     $emailid = $_POST['email'];
-    $password = $_POST['password'];
+    $password = $_POST['password1'];
     $lid= $_POST['LID'];
+    $name = $_POST['name'];
     $conn = new mysqli('localhost',"root","",'library');
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $sql="INSERT INTO librarian (libID,email,password) VALUES (?,?,?);";
+    $sql="INSERT INTO librarian (libID,email,password,name) VALUES (?,?,?,?);";
     echo $sql;
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("iss",$lid,$emailid,$password);
+    $stmt->bind_param("isss",$lid,$emailid,$password,$name);
     $stmt->execute();
     session_start();
-    header('Location:home.php');
+    header('Location:signIn.php');
 }
 ?>
 
@@ -47,7 +48,7 @@ if((isset($_POST['email']))){
         <legend>Personal Information</legend>
         <div>
             <label for="name">Enter Name:</label>
-            <input type="text" name="name" id="email" class="txt" />
+            <input type="text" name="name"  class="txt" />
         </div>
         <div>
             <label for="ID">Enter Librarian ID:</label>
