@@ -1,0 +1,54 @@
+.title{
+    text-align: center;
+    color: white;
+    font-size: 50px;
+    padding-top: 20px;
+}
+
+form{
+    width: 50%;
+    margin-left: 300px;
+}
+
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 2px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: Red;
+    color: black;
+    padding: 15px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.25em
+}
+
+.signupbtn {
+    float: left;
+    width: 50%;
+}
+
+.container {
+    padding: 16px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.signupbtn {
+    width: 100%;
+}
+
+body {
+    background-color: #8B0000;
+}
