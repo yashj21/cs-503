@@ -1,20 +1,21 @@
 <?php
 echo "it's here";
-//if(isset($_GET['logout'])){
-//    session_destroy();
-//    header('Location:signIn.php');
-//}
+if(isset($_GET['logout'])){
+    session_destroy();
+    header('Location:signIn.php');
+}
 if(isset($_POST['author'])) {
     echo "its here";
     $author = $_POST['author'];
     $title = $_POST['title'];
     $publisher = $_POST['publisher'];
-    $bookid = (int)$_POST['bookid'];
+    $bookid = $_POST['bookid'];
     $conn = new mysqli("localhost", "root", "", 'library');
     $insertqry = "insert into books(bID,publication,author,title,stock) value (?,?,?,?,1)";
     $prepareqry = $conn->prepare($insertqry);
-    $prepareqry->bind_param('isss', $author, $title, $publisher, $bookid);
+    $prepareqry->bind_param('isss', $bookid, $author, $title,$publisher);
     $prepareqry->execute();
+    echo "  ";
     echo $prepareqry->affected_rows;
     if ($prepareqry === false) {
         echo "<h1>record not inserted</h1>";
