@@ -1,4 +1,20 @@
 <?php
+if(isset($_POST['title']) && $_POST['bookid']){
+    $conn = new mysqli("localhost", "root", "", 'library');
+    $title = $_POST['title'];
+    $bookid = (int)$_POST['bookid'];
+    $deleterecord = "delete from books where bID=? and title =?";
+    $prepareqry = $conn->prepare($deleterecord);
+    $prepareqry->bind_param('is', $bookid,$title);
+    $prepareqry->execute();
+
+    if ($prepareqry === false) {
+        echo "<h1>record not inserted</h1>";
+        header('Location:removebook.php');
+    }else{
+        echo "<script> alert('Data successfully deleted')</script>";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,16 +37,16 @@
     </div>
 </nav>
 <h2 align="center"><font size="10">Remove A Book</font></h2>
-<form action="/action_page.php" style="border:1px solid #ccc">
+<form action="removebook.php" style="border:1px solid #ccc" method="post">
     <div class="container">
-        <label><b><font size="6">Title</font></b></label>
-        <input type="text" placeholder="Enter Title" name="Title" required>
+        <label><b><font size="6">Title</font></b></label><br>
+        <input type="text" placeholder="Enter Title" name="title" required>
 
-        <br></br>
+        <br>
 
         <label><b><font size="6">Book ID</font></b></label>
         <br>
-        <input type="number" placeholder="Enter Book ID" name="BookID" required>
+        <input type="number" placeholder="Enter Book ID" name="bookid" required>
         <div class="clearfix">
             <br>
             <button type="submit" class="signupbtn">Remove</button>
