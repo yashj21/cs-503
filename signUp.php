@@ -1,6 +1,6 @@
 <?php
 if((isset($_POST['email']))){
-    echo $_POST['email'];
+    //echo $_POST['email'];
     $emailid = $_POST['email'];
     $password = $_POST['password1'];
     $lid= $_POST['LID'];

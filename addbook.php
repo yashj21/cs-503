@@ -1,5 +1,6 @@
 <?php
 if(isset($_GET['logout'])){
+    unset($_SESSION['id']);
     session_destroy();
     header('Location:signIn.php');
 }
@@ -26,17 +27,66 @@ if(isset($_POST['author'])) {
         Add A Book
     </title>
     <head>
-        <link rel="stylesheet" href="addBookStyles.css">
+
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="addBookStyles.css">
 
     </head>
+    <style>
+        .title{
+            text-align: center;
+            color: white;
+            font-size: 50px;
+            padding-top: 20px;
+        }
+        form{
+            width: 50%;
+            margin-left: 300px;
+        }
+
+        input[type=text], input[type=password],input[type=number] {
+            width: 90%;
+            padding: 12px 20px;
+            margin: 8px 20px;
+            display: grid;
+            border: 2px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #288db5;
+            color: white;
+            padding: 15px 20px;
+            margin: 8px 20px;
+            cursor: pointer;
+            width: 50%;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        h2{
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif
+        }
+        label{
+            display: grid;
+            max-width: 40%;!important;
+            margin-bottom: 5px;!important;
+            font-size: large;!important;
+            margin-left: 20px;!important;
+        }
+
+    </style>
     <body>
     <nav class="navbar">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="index.php">Library</a>
+                <a class="navbar-brand" href="index.php?id=<?php
+                if(isset($_SESSION['id']))echo urlencode($_SESSION['id']);?>">Library</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="addbook.php"><span class="glyphicon glyphicon-plus"></span>Add Books</a>
@@ -60,7 +110,7 @@ if(isset($_POST['author'])) {
             <input type="text" placeholder="Enter Publisher" name="publisher" required>
 
             <label><b>Book ID</b></label>
-            <br>
+
             <input type="number" placeholder="Enter Book ID" name="bookid" required>
 
             <div>

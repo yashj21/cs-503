@@ -1,12 +1,12 @@
 <?php
-/*session_start();*/
-$conn = new mysqli("localhost","root","","library");
-if(isset($_POST['search'])){
-    $tosearch = $_POST['search'];
-    $queryToRun = "select * from books where title like '%". $tosearch . "%';" ;
-    $result=$conn->query($queryToRun);
+
+$conn = new mysqli("localhost","root","","library");//this gets a database connection
+if(isset($_POST['search'])){//this checks if the data record search is in the POST array
+    $tosearch = $_POST['search'];// we store it in a local variable
+    $queryToRun = "select * from books where title like '%". $tosearch . "%';" ; //string query to match for similar book title
+    $result=$conn->query($queryToRun);//run the query
     while($row=mysqli_fetch_assoc($result)) {
-        $product_array[] = $row;
+        $product_array[] = $row;//store in product array
     }
     unset($_POST['search']);
 }
@@ -67,8 +67,18 @@ if(isset($_GET["action"])) {
             <a class="navbar-brand" href="index.php">Library</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
+            <?php
+            if(isset($_GET['id'])){
+                ?>
+                <li><a href="addbook.php?logout=true"><span class="glyphicon glyphicon-log-out"></span>Log Out</a></li>
+                <?php
+            }else{
+            ?>
             <li><a href="signUp.php"><span class="glyphicon glyphicon-user"></span>Admin Sign Up</a></li>
             <li><a href="signIn.php"><span class="glyphicon glyphicon-log-in"></span>Admin Login</a></li>
+            <?php
+            }
+            ?>
         </ul>
     </div>
 </nav>

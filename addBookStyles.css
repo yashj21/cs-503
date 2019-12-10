@@ -10,10 +10,10 @@ form{
     }
 
 input[type=text], input[type=password],input[type=number] {
-  width: 40%;
+  width: 100%;
   padding: 12px 20px;
   margin: 8px 20px;
-  display: inline-block;
+  float: left;
   border: 2px solid #ccc;
   box-sizing: border-box;
 }
@@ -34,6 +34,13 @@ button {
 h2{
     text-align: center;
     font-family: Arial, Helvetica, sans-serif
+}
+label{
+    display: flex;!important;
+    max-width: 100%;!important;
+    margin-bottom: 5px;!important;
+    font-size: large;!important;
+    margin-left: 20px;!important;
 }
 
 /*body{*/

@@ -1,33 +1,34 @@
 <?php
-require_once("dbconnection.php");
-$db_handle = new DBConection();
+//require_once("dbconnection.php");
+//$db_handle = new DBConection();
 if(isset($_SESSION['id'])){
   header('Location:addbook.php');
 }
 if(isset($_POST["email"])){
-    echo "here";
+  //  echo "here";
 $emailid = $_POST["email"];
 $password = $_POST["password"];
-echo $_POST['email'];
+//echo $_POST['email'];
 $conn = new mysqli("localhost","root","",'library');
-echo $emailid;
-echo $password;
+//echo $emailid;
+//echo $password;
 $queryToValidate="select libID from librarian where email='$emailid' and password='$password';";
-echo $queryToValidate;
+//echo $queryToValidate;
 $result = $conn->query($queryToValidate);
 
 if($result->num_rows > 0){
-    echo "now hee\n";
+//    echo "now hee\n";
   //  $row = $result->fetch_row();
   $row = $result->fetch_row();
-  echo $_SESSION['id'];
-  session_start();
+  //echo $_SESSION['id'];
+    session_start();
     $_SESSION['id'] = $row[0];
     header('Location:addbook.php');
 }else{
-    echo '<script language="javascript">';
-    echo 'window.alert("Either your email id or password is wrong")';
+    echo '<script>';
+    echo 'alert("Either your email id or password is wrong")';
     echo '</script>';
+    header("Refresh:1;url=signIn.php");
 }
 }
  ?>
